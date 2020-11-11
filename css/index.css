@@ -97,3 +97,6 @@ hr{
     height: 2.5px;
     width: 100%;
 }
+a{
+    cursor: pointer;
+}
