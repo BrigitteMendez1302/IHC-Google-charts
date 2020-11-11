@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/index.css" />
+    <!--Fonts-->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/4a3c6056ec.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <title>All About Mask</title>
+  </head>
+  <body>
+    <header>
+      <div class="logo" id="size1">ALL ABOUT MASK</div>
+      <div id="title">Estadísticas</div>
+    </header>
+    <main>
+      <section class="menu">
+        <!--1-->
+        <div class="titulo-botones">Mascarillas solicitadas</div>
+        <ul class="botones">
+          <li id="brigitte">
+            <i class="far fa-building"></i>
+            <a>Por Zona</a>
+          </li>
+          <li id="patrick">
+            <i class="fas fa-university"></i>
+            <a>Por Entidad</a>
+          </li>
+        </ul>
+        <!--2-->
+        <div class="titulo-botones">POR MES</div>
+        <ul class="botones">
+          <li id="lucas">
+            <i class="far fa-hand-peace"></i>
+            <a>Promedio Por Persona</a>
+          </li>
+          <li id="maryorie">
+            <i class="fas fa-award"></i>
+            <a>ONG's con mayores solicitudes</a>
+          </li>
+        </ul>
+      </section>
+      <section class="grafico" id="graficos">
+        <div id="piechart" style="width: 700px; height: 400px"></div>
+      </section>
+    </main>
+    <footer>
+      <div class="logo" id="size0">ALL ABOUT MASK</div>
+      <div><hr /></div>
+      <div>Copyright © 2020 Grupo 5</div>
+    </footer>
+    <script
+      type="text/javascript"
+      src="https://www.gstatic.com/charts/loader.js"
+    ></script>
+    <script src="geochart.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", { packages: ["corechart"] });
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ["Language", "Masks (in millions)"],
+          ["Tu Mascarilla", 3600],
+          ["ONGMasca", 1700],
+          ["Otros", 300],
+          ["ONG", 1200],
+          ["Mask", 700],
+          ["Mascarilla", 2500],
+        ]);
+
+        var options = {
+          title: "Top 5 ONG del mes",
+          titleTextStyle: {
+            fontName: "Roboto",
+            fontSize: 24,
+          },
+          tooltipTextStyle: {
+            fontName: "Roboto",
+          },
+          backgroundColor: "white",
+          legend: "none",
+          pieSliceText: "label",
+          <!--pieStartAngle: 210,-->
+          slices: {
+            2: { color: "transparent" },
+          },
+        };
+
+        var chart = new google.visualization.PieChart(
+          document.getElementById("piechart")
+        );
+
+        chart.draw(data, options);
+      }
+    </script>
+    <script type="text/javascript">
+      let contenedor = document.getElementById("graficos");
+      let maryorie = document.getElementById("maryorie");
+      let brigitte = document.getElementById("brigitte");
+      let patrick = document.getElementById("patrick");
+      let lucas = document.getElementById("lucas");
+
+      maryorie.addEventListener("click", () => {
+        contenedor.innerHTML = "";
+        contenedor.innerHTML =
+          '<div id="piechart" style="width: 700px; height: 400px;"></div>';
+        google.charts.load("current", { packages: ["corechart"] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+          var data = google.visualization.arrayToDataTable([
+            ["Language", "Masks (in millions)"],
+            ["Tu Mascarilla", 3600],
+            ["ONGMasca", 1700],
+            ["Otros", 300],
+            ["ONG", 1200],
+            ["Mask", 700],
+            ["Mascarilla", 2500],
+          ]);
+
+          var options = {
+            title: "Top 5 ONG del mes",
+            titleTextStyle: {
+              fontName: "Roboto",
+              fontSize: 24,
+            },
+            tooltipTextStyle: {
+              fontName: "Roboto",
+            },
+            backgroundColor: "transparent",
+            legend: "none",
+            pieSliceText: "label",
+            <!--pieStartAngle: 210,-->
+            slices: {
+              2: { color: "transparent" },
+            },
+          };
+
+          var chart = new google.visualization.PieChart(
+            document.getElementById("piechart")
+          );
+
+          chart.draw(data, options);
+        }
+      });
+      patrick.addEventListener("click", () => {
+        contenedor.innerHTML = "";
+        contenedor.innerHTML =
+          '<div id="columnchart_values" style="width: 700px; height: 400px;"></div>';
+        google.charts.load("current", { packages: ["corechart"] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+          var data = google.visualization.arrayToDataTable([
+            ["Entidad", "Cantidad", { role: "style" }],
+            ["Hospital 2 de Mayo", 35.5, "#4646d6"],
+            ["Hospital San José", 29.5, "#279d6e"],
+            ["Hospital Solidaridad", 32.5, "1A89FF"],
+            ["ONG APRODE PERÚ", 17.5, "#1a89ff"],
+            ["ONG Cambiando vidas", 11.8, "#b87333"],
+            ["ONG Care Perú", 23.7, "#d9af41"],
+            ["ONG Ángeles de ayuda", 13.6, "#a94097"],
+          ]);
+
+          var view = new google.visualization.DataView(data);
+          view.setColumns([
+            0,
+            1,
+            {
+              calc: "stringify",
+              sourceColumn: 1,
+              type: "string",
+              role: "annotation",
+            },
+            2,
+          ]);
+
+          var options = {
+            title:
+              "Cantidad de Mascarillas Solicitadas por Entidad (en millares)",
+            width: 700,
+            height: 400,
+            backgroundColor: "transparent",
+            bar: { groupWidth: "95%" },
+            legend: { position: "none" },
+          };
+          var chart = new google.visualization.ColumnChart(
+            document.getElementById("columnchart_values")
+          );
+
+          chart.draw(data, options);
+
+          var view = new google.visualization.DataView(data);
+          view.setColumns([
+            0,
+            1,
+            {
+              calc: "stringify",
+              sourceColumn: 1,
+              type: "string",
+              role: "annotation",
+            },
+            2,
+          ]);
+        }
+      });
+      brigitte.addEventListener("click", () => {
+        contenedor.innerHTML = "";
+        contenedor.innerHTML =
+          '<div id="regions_div" style="width: 900px; height: 500px"></div>';
+        google.charts.load("current", {
+          packages: ["geochart"],
+          mapsApiKey: "AIzaSyCSSWQ6CYtW8YhBBGAsPXHfTeZtiSP27D4",
+        });
+        google.charts.setOnLoadCallback(drawRegionsMap);
+      });
+      lucas.addEventListener("click", () => {
+        contenedor.innerHTML = "";
+        contenedor.innerHTML =
+          '<div id="columnchart_values" style="width: 700px; height: 400px;"></div>';
+        google.charts.load("current", { packages: ["corechart"] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+          var data = google.visualization.arrayToDataTable([
+            ["Entidad", "Cantidad", { role: "style" }],
+            ["Enero", 1.2, "#4646d6"],
+            ["Febrero", 1.7, "#279d6e"],
+            ["Marzo", 4.5, "1A89FF"],
+            ["Abril", 5.7, "#1a89ff"],
+            ["Mayo", 6.8, "#b87333"],
+            ["Junio", 10.1, "#d9af41"],
+            ["Julio", 11.4, "#a94097"],
+            ["Agosto", 11.3, "#4646d6"],
+            ["Septiembre", 10.5, "#279d6e"],
+            ["Octubre", 10.1, "1A89FF"],
+            ["Noviembre", 11.1, "#1a89ff"],
+            ["Diciembre", 10.0, "#b87333"],
+          ]);
+
+          var view = new google.visualization.DataView(data);
+          view.setColumns([
+            0,
+            1,
+            {
+              calc: "stringify",
+              sourceColumn: 1,
+              type: "string",
+              role: "annotation",
+            },
+            2,
+          ]);
+
+          var options = {
+            title:
+              "Cantidad de Mascarillas Solicitadas en Promedio por Persona por Mes(en unidades)",
+            width: 700,
+            height: 400,
+            backgroundColor: "transparent",
+            bar: { groupWidth: "95%" },
+            legend: { position: "none" },
+          };
+          var chart = new google.visualization.ColumnChart(
+            document.getElementById("columnchart_values")
+          );
+
+          chart.draw(data, options);
+
+          var view = new google.visualization.DataView(data);
+          view.setColumns([
+            0,
+            1,
+            {
+              calc: "stringify",
+              sourceColumn: 1,
+              type: "string",
+              role: "annotation",
+            },
+            2,
+          ]);
+        }
+      });
+    </script>
+  </body>
+</html>

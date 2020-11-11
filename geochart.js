@@ -1,0 +1,76 @@
+function drawRegionsMap() {
+        var data = google.visualization.arrayToDataTable([
+          ["Estado", "# de mascarillas solicitadas"],
+          ["Alabama", 354],
+          ["Alaska", 800],
+          ["Arizona", 621],
+          ["Arkansas", 645],
+          ["California", 960],
+          ["Colorado", 530],
+          ["Connecticut", 859],
+          ["Delaware", 452],
+          ["Florida", 369],
+          ["Georgia", 159],
+          ["Hawaii", 169],
+          ["Idaho", 780],
+          ["Illinois", 549],
+          ["Indiana", 1123],
+          ["Iowa", 490],
+          ["Kansas", 1230],
+          ["Kentucky", 698],
+          ["Louisiana", 781],
+          ["Maine", 960],
+          ["Maryland", 236],
+          ["Massachusetts", 1140],
+          ["Michigan", 450],
+          ["Minnesota", 760],
+          ["Mississippi", 1150],
+          ["Missouri", 124],
+          ["Montana", 689],
+          ["Nebraska", 765],
+          ["Nevada", 125],
+          ["New Hampshire", 630],
+          ["New Jersey", 158],
+          ["New Mexico", 426],
+          ["New York", 562],
+          ["North Carolina", 237],
+          ["North Dakota", 458],
+          ["Ohio", 785],
+          ["Oklahoma", 402],
+          ["Oregon", 653],
+          ["Pennsylvania", 451],
+          ["Rhode Island", 556],
+          ["South Carolina", 1654],
+          ["South Dakota", 200],
+          ["Tennessee", 425],
+          ["Texas", 738],
+          ["Utah", 239],
+          ["Vermont", 789],
+          ["Virginia", 654],
+          ["Washington", 754],
+          ["West Virginia", 654],
+          ["Wisconsin", 875],
+          ["Wyoming", 425],
+        ]);
+
+        var options = {
+          title: "Mascarillas pedidas por zona",
+          titleTextStyle: {
+              fontName: "Roboto",
+              fontSize: 24,
+          },
+          region: "US",
+          colorAxis: { colors: ["#1A89FF", "#A94097", "#D9AF41", "#279D6E"] },
+          backgroundColor: "transparent",
+          datalessRegionColor: "#f8bbd0",
+          defaultColor: "#f5f5f5",
+          displayMode: "regions",
+          resolution: "provinces",
+        };
+
+        var chart = new google.visualization.GeoChart(
+          document.getElementById("regions_div")
+        );
+
+        chart.draw(data, options);
+      }
